@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#351025">
+<title>Private Wedding Surprise | Pawan & Pragati</title>
+
+<style>
+:root {
+  --wine:#5b1834;
+  --rose:#b84d70;
+  --gold:#d7ad69;
+  --cream:#fff7ed;
+  --ink:#54283a;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; min-height:100vh; padding:20px 14px;
+  display:grid; place-items:center; overflow-x:hidden;
+  color:var(--ink); font-family:Georgia,"Times New Roman",serif;
+  background:
+    radial-gradient(ellipse at 15% 10%,rgba(255,220,222,.5),transparent 35%),
+    radial-gradient(ellipse at 85% 85%,rgba(225,190,151,.3),transparent 35%),
+    linear-gradient(145deg,#3c1027,#762746 48%,#3b142b);
+}
+button {
+  border:0; border-radius:999px; padding:13px 21px; cursor:pointer;
+  font:13px Arial,sans-serif; letter-spacing:.5px;
+  transition:transform .2s,opacity .2s;
+}
+button:active { transform:scale(.97); }
+.primary {
+  background:linear-gradient(120deg,#7a2448,#b65372);
+  color:white; box-shadow:0 7px 18px #8e3d5a38;
+}
+.secondary {
+  color:#8b4a60; background:#f7e4df;
+  border:1px solid #e8c9bf;
+}
+
+/* PASSWORD SCREEN */
+#securityScreen {
+  position:fixed; inset:0; z-index:100;
+  display:flex; justify-content:center; align-items:center;
+  padding:22px;
+  background:radial-gradient(circle at center,#8c3458,#351025 75%);
+}
+.security-box {
+  width:min(100%,370px); text-align:center;
+  padding:30px 23px; border-radius:24px;
+  background:linear-gradient(145deg,#fffaf3,#fff0ed);
+  border:2px solid var(--gold);
+  box-shadow:0 22px 65px #16000d88;
+  animation:securityOpen .8s ease;
+}
+@keyframes securityOpen {
+  from { opacity:0; transform:scale(.86) translateY(15px); }
+  to { opacity:1; transform:scale(1) translateY(0); }
+}
+.lock-icon { font-size:43px; color:#bd9250; }
+.security-box h2 {
+  color:var(--wine); font-size:25px; font-weight:normal;
+  margin:14px 0 10px;
+}
+.security-box p { color:#98616b; line-height:1.6; font-size:14px; }
+.security-box input {
+  display:block; width:100%; padding:14px;
+  margin:20px 0 12px; border:1px solid #d5ad69;
+  border-radius:11px; background:#fff;
+  text-align:center; font-size:16px; outline:none;
+}
+.security-box input:focus { border-color:#9d526b; box-shadow:0 0 0 3px #b84d7020; }
+.security-box button { width:100%; }
+#errorMessage { min-height:18px; color:#b32642; font:12px Arial,sans-serif; margin-top:12px; }
+
+/* FALLING PETALS */
+.petals {
+  position:fixed; inset:0; pointer-events:none;
+  overflow:hidden; z-index:1;
+}
+.petal {
+  position:absolute; top:-35px; width:13px; height:19px;
+  background:linear-gradient(135deg,#ffe2e7,#d77a94);
+  border-radius:80% 10% 80% 10%; opacity:.75;
+  animation:fall linear infinite;
+}
+@keyframes fall {
+  to { transform:translate3d(80px,110vh,0) rotate(620deg); }
+}
+
+/* WEDDING CARD */
+.wrap { width:min(100%,520px); position:relative; z-index:2; }
+.card {
+  position:relative; overflow:hidden; text-align:center;
+  padding:34px 22px 30px; border-radius:28px;
+  background:linear-gradient(150deg,#fffaf3,#fff0ed 55%,#f8e6df);
+  border:1px solid rgba(235,204,151,.9);
+  box-shadow:0 24px 80px rgba(15,0,9,.45),inset 0 0 0 7px rgba(255,255,255,.42);
+}
+.card:before,.card:after {
+  content:"✦"; position:absolute; color:var(--gold);
+  font-size:25px; opacity:.8;
+}
+.card:before { top:17px; left:20px; }
+.card:after { bottom:17px; right:20px; }
+.inner {
+  border:1px solid rgba(190,139,83,.55);
+  border-radius:20px; padding:26px 15px 22px;
+}
+.crown { color:var(--gold); font-size:28px; letter-spacing:8px; margin-bottom:8px; }
+.eyebrow { text-transform:uppercase; letter-spacing:4px; font-size:10px; color:#a66a61; }
+h1 {
+  color:var(--wine); font-size:clamp(31px,8vw,43px);
+  font-weight:500; line-height:1.12; margin:14px 0 5px;
+}
+.amp { color:var(--gold); font-size:25px; font-style:italic; margin:0; }
+.subtitle { color:#98616b; font-style:italic; font-size:16px; margin:13px 0 18px; }
+.ornament { color:var(--gold); font-size:23px; letter-spacing:7px; margin:13px 0; }
+.message {
+  font-size:16px; line-height:1.7; max-width:350px;
+  margin:0 auto; color:#704353;
+}
+.count-box {
+  margin:23px auto 18px; padding:17px 12px 14px;
+  max-width:390px; border-radius:18px;
+  background:rgba(255,255,255,.62);
+  border:1px solid rgba(197,151,102,.45);
+}
+.count-title { color:#a05b68; text-transform:uppercase; letter-spacing:2.5px; font-size:10px; }
+.date { color:var(--wine); font-size:17px; margin:8px 0 13px; }
+.timer { display:grid; grid-template-columns:repeat(4,1fr); gap:7px; }
+.unit { background:#fffaf7; border:1px solid #f0d9d1; border-radius:11px; padding:10px 3px 8px; }
+.number {
+  display:block; font-family:Arial,sans-serif; font-weight:700;
+  color:var(--wine); font-size:clamp(22px,6vw,29px);
+  font-variant-numeric:tabular-nums;
+}
+.label {
+  display:block; color:#a56f76; font:9px Arial,sans-serif;
+  text-transform:uppercase; letter-spacing:1px; margin-top:4px;
+}
+.signoff { color:#9b6570; font-style:italic; margin-top:18px; font-size:15px; }
+.heart { display:inline-block; color:#c35a78; animation:heartbeat 1.4s ease-in-out infinite; }
+@keyframes heartbeat { 50% { transform:scale(1.25); } }
+.footer {
+  color:#a77a77; font:10px Arial,sans-serif;
+  letter-spacing:1.8px; margin-top:22px; text-transform:uppercase;
+}
+.actions { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-top:17px; }
+.music-note { font:10px Arial,sans-serif; color:#a9797d; margin-top:12px; }
+
+/* OPENING SCREEN */
+.intro {
+  position:fixed; inset:0; z-index:5; display:grid; place-items:center;
+  padding:24px; background:radial-gradient(circle at center,#8c3458,#351025 75%);
+  transition:opacity .8s ease,visibility .8s ease;
+}
+.intro.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+.intro-panel { text-align:center; color:#fff5e9; max-width:390px; }
+.intro-panel .small { color:#e9c68f; letter-spacing:4px; text-transform:uppercase; font:10px Arial,sans-serif; }
+.intro-panel h2 { font-weight:400; font-size:clamp(34px,9vw,48px); margin:17px 0 10px; }
+.intro-panel p { color:#f3dce0; font-style:italic; line-height:1.6; }
+
+@media(max-width:360px) {
+  .card { padding:25px 13px; }
+  .inner { padding:23px 10px 18px; }
+  .timer { gap:4px; }
+  .unit { padding:9px 1px 7px; }
+}
+@media(prefers-reduced-motion:reduce) {
+  *,*::before,*::after {
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD SECURITY -->
+<div id="securityScreen">
+  <div class="security-box">
+    <div class="lock-icon">♛ 🔐</div>
+    <h2>Private Wedding Surprise</h2>
+    <p>This card is specially made for<br>
+    <strong>Pawan Singh & Pragati Tomar</strong> ❤️</p>
+
+    <input type="password" id="secretPassword"
+      placeholder="Enter Secret Password"
+      autocomplete="off" aria-label="Secret password">
+
+    <button class="primary" id="unlockButton" type="button">
+      Unlock Surprise ♥
+    </button>
+    <div id="errorMessage" role="alert"></div>
+  </div>
+</div>
+
+<!-- FLOATING PETALS -->
+<div class="petals" id="petals" aria-hidden="true"></div>
+
+<!-- OPENING ANIMATION -->
+<div class="intro" id="intro">
+  <div class="intro-panel">
+    <div class="small">A little surprise, made with love</div>
+    <h2>A Beautiful<br>Beginning</h2>
+    <p>For two wonderful people<br>and a journey full of happiness.</p>
+    <button class="primary" id="openCard" type="button">
+      Open Your Surprise ♥
+    </button>
+  </div>
+</div>
+
+<!-- MAIN WEDDING CARD -->
+<main class="wrap">
+  <section class="card" aria-label="Private wedding greeting card">
+    <div class="inner">
+      <div class="crown">✧ ♛ ✧</div>
+      <div class="eyebrow">A celebration of love</div>
+
+      <h1>Pawan Singh</h1>
+      <p class="amp">&</p>
+      <h1>Pragati Tomar</h1>
+
+      <div class="ornament">❧ ❦ ❧</div>
+      <p class="subtitle">Two hearts, one beautiful journey</p>
+
+      <p class="message">
+        May your days be filled with laughter, your hearts with understanding,
+        and your life together with endless love and beautiful memories.
+      </p>
+
+      <!-- LIVE COUNTDOWN -->
+      <div class="count-box">
+        <div class="count-title" id="countTitle">
+          Counting down to your special day
+        </div>
+        <div class="date">19 November 2026</div>
+
+        <div class="timer" id="timer">
+          <div class="unit">
+            <span class="number" id="days">--</span>
+            <span class="label">Days</span>
+          </div>
+          <div class="unit">
+            <span class="number" id="hours">--</span>
+            <span class="label">Hours</span>
+          </div>
+          <div class="unit">
+            <span class="number" id="minutes">--</span>
+            <span class="label">Minutes</span>
+          </div>
+          <div class="unit">
+            <span class="number" id="seconds">--</span>
+            <span class="label">Seconds</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="message">
+        Wishing you both a lifetime of togetherness, warmth, and little moments
+        that become the loveliest memories.
+      </p>
+
+      <p class="signoff">With lots of love <span class="heart">♥</span></p>
+      <div class="footer">Made with love · Just for you both</div>
+
+      <div class="actions">
+        <button class="secondary" id="musicButton" type="button">
+          ♫ Play Music
+        </button>
+      </div>
+      <p class="music-note">A little melody for your special beginning</p>
+    </div>
+  </section>
+</main>
+
+<!-- Keep your royalty-free MP3 beside this HTML file.
+     File name: soft-romantic-instrumental.mp3 -->
+<audio id="bgMusic" loop preload="none">
+  <source src="soft-romantic-instrumental.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+
+/* PASSWORD SYSTEM */
+const SECRET_PASSWORD = "PT@1911";
+
+function unlockCard() {
+  const input = document.getElementById("secretPassword");
+  const error = document.getElementById("errorMessage");
+
+  if (input.value === SECRET_PASSWORD) {
+    const screen = document.getElementById("securityScreen");
+    screen.style.transition = "opacity .8s ease";
+    screen.style.opacity = "0";
+
+    setTimeout(() => {
+      screen.style.display = "none";
+      input.value = "";
+    }, 800);
+
+  } else {
+    error.textContent = "Incorrect password! Please try again ❤️";
+    input.value = "";
+    input.focus();
+  }
+}
+
+document.getElementById("unlockButton")
+  .addEventListener("click", unlockCard);
+
+document.getElementById("secretPassword")
+  .addEventListener("keydown", function(event) {
+    if (event.key === "Enter") unlockCard();
+  });
+
+/* OPENING ANIMATION */
+document.getElementById("openCard").addEventListener("click", () => {
+  document.getElementById("intro").classList.add("hidden");
+});
+
+/* LIVE COUNTDOWN — INDIA TIME */
+const targetDate =
+  new Date("2026-11-19T00:00:00+05:30").getTime();
+
+function updateCountdown() {
+  const remaining = targetDate - Date.now();
+
+  if (remaining <= 0) {
+    document.getElementById("countTitle").textContent =
+      "The special day is here! ❤️";
+
+    document.getElementById("timer").innerHTML =
+      '<div style="grid-column:1/-1;color:#7a2448;font-size:18px;padding:8px">Wishing you both endless happiness ♥</div>';
+
+    clearInterval(countdownInterval);
+    return;
+  }
+
+  const day = Math.floor(remaining / 86400000);
+  const hour = Math.floor((remaining % 86400000) / 3600000);
+  const minute = Math.floor((remaining % 3600000) / 60000);
+  const second = Math.floor((remaining % 60000) / 1000);
+
+  document.getElementById("days").textContent =
+    String(day).padStart(2,"0");
+  document.getElementById("hours").textContent =
+    String(hour).padStart(2,"0");
+  document.getElementById("minutes").textContent =
+    String(minute).padStart(2,"0");
+  document.getElementById("seconds").textContent =
+    String(second).padStart(2,"0");
+}
+
+updateCountdown();
+const countdownInterval = setInterval(updateCountdown,1000);
+
+/* FALLING ROSE PETALS */
+const petals = document.getElementById("petals");
+
+for (let i=0; i<22; i++) {
+  const petal = document.createElement("span");
+  petal.className = "petal";
+  petal.style.left = (Math.random()*100)+"%";
+  petal.style.animationDuration = (8+Math.random()*10)+"s";
+  petal.style.animationDelay = (-Math.random()*16)+"s";
+  petal.style.opacity = (0.35+Math.random()*0.55).toFixed(2);
+  petals.appendChild(petal);
+}
+
+/* BACKGROUND MUSIC */
+const music = document.getElementById("bgMusic");
+const musicButton = document.getElementById("musicButton");
+
+async function toggleMusic() {
+  if (music.paused) {
+    try {
+      await music.play();
+      musicButton.textContent = "♫ Pause Music";
+    } catch (error) {
+      musicButton.textContent = "Add MP3 to play music";
+    }
+  } else {
+    music.pause();
+    musicButton.textContent = "♫ Play Music";
+  }
+}
+
+musicButton.addEventListener("click",toggleMusic);
+
+music.addEventListener("ended",() => {
+  musicButton.textContent = "♫ Play Music";
+});
+
+</script>
+</body>
+</html>
+
